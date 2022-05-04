@@ -22,7 +22,7 @@ Feature: Workitem_TFSScrum
     And i create a "<WorkRequest>" in TFS
     And i create "<Release>" and "<Sprint>" in TFS
     And i update the WorkItemExternalIDs into a New JSON file for "<applicationname>"
-#    And i put a explicit wait of "30000"
+    And i put a explicit wait of "600000"
 #    And i generate a token for "DevTest" environment
 
     Examples:
