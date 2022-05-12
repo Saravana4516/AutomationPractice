@@ -74,9 +74,9 @@ Scenario: TFSScrum_WorkRequest
 	
 Scenario Outline: TFSScrum_DIY_IBVerification_Release_Sprint 
 	Given i login to application "<applicationname>" 
-	And i navigate to the homepage of "<applicationname>" from "AIFusionPage"
-	And i click on tile "my Queries"
 	Then i select client and DC for "<applicationname>"
+	And i navigate to the homepage of "<applicationname>" from "AIFusionPage"
+	And i click on tile "my Queries"	
 	And i capture the "IterationExternalID" for Entities created from "tool" for tool "TFS Scrum" 
 	And i generate a token for "DevTest" environment 	
 	And i verify if "Release" has "flown" which was "NA" for "TFS Scrum" for "Normal" functionality

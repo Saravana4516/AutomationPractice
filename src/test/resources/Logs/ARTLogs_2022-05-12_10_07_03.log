@@ -1,0 +1,12 @@
+May 12, 2022 10:07:03 AM stepDefs.Hooks startUp
+INFO: Scenario ADIT_WorkitemCreation run is starting now
+May 12, 2022 10:07:03 AM stepDefs.Hooks startUp
+INFO: Scenario start time: 2022-05-12 10:07:03.831
+May 12, 2022 10:07:04 AM testobjects.CommonFunctions copyFileContentFromOneFileToAnother
+INFO: Property File loaded
+May 12, 2022 10:07:39 AM utilities.selenium.SeleniumDSL prepareWebElementWithDynamicXpath
+INFO: Generated xpath isBy.xpath: //div[text()='Release_AutomationData8102']
+May 12, 2022 10:07:39 AM utilities.selenium.SeleniumDSL prepareWebElementWithDynamicXpath
+INFO: Generated xpath isBy.xpath: //div[@class='grid-cell-contents-container'][text()='Release_AutomationData8102']//preceding::div[@aria-label='Row actions'][1]
+May 12, 2022 10:08:19 AM testobjects.AIDTWorkitem EnterWorkItemDetails
+INFO: issue entering workitem details for workitem Bug_01

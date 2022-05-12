@@ -1,40 +1,18 @@
 package testobjects;
 
-import static org.testng.Assert.assertEquals;
-import static testobjects.RallyWorkitem.CaptureWorkitemID;
-import static testobjects.TFSWorkitem.GoToWorkitemURL;
 import static utilities.reporting.LogUtil.logger;
 import static utilities.reporting.Reporting.create_logs_and_report;
 import static utilities.selenium.SeleniumDSL.*;
 
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Random;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebElement;
-import org.sikuli.script.Pattern;
-import org.sikuli.script.Screen;
 import org.testng.Assert;
-import org.testng.asserts.SoftAssert;
-
-
 import dataobjects.WorkItemDO;
 import uiMap.TFSUIMap;
-import uiMap.myQueriesUIMap;
 import utilities.general.DataManager;
 import utilities.general.Property;
 
@@ -484,7 +462,8 @@ public class AIDTWorkitem extends Baseclass {
 //Sponsor
             if (!wi.Sponsor.equalsIgnoreCase("NA")) {
                 singleClick(TFSUIMap.Sponsor_drpdwn);
-                ExpWaitForCondition(TFSUIMap.Sponsor_txtbox);
+//              ExpWaitForCondition(TFSUIMap.Sponsor_txtbox);
+                singleClick(TFSUIMap.Sponsor_drpdwn);
                 Thread.sleep(2000);
                 enterText(TFSUIMap.Sponsor_txtbox, wi.Sponsor);
 // EnterDataInTheField(wi.Sponsor,TFSUIMap.Sponsor_drpdwn);
@@ -509,11 +488,11 @@ public class AIDTWorkitem extends Baseclass {
 // team
             if (!wi.TeamArea.equalsIgnoreCase("NA")) {
 
-
+            	 Thread.sleep(3000);
                 clickJS(TFSUIMap.TeamArea_label);
-                Thread.sleep(2000);
+                Thread.sleep(3000);
                 enterText(TFSUIMap.TeamArea_label1, Property.getProperty("TFSProject") + "\\" + wi.TeamArea);
-                Thread.sleep(2000);
+                Thread.sleep(3000);
                 sendEntr();
 
 
