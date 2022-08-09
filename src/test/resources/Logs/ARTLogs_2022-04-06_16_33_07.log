@@ -1,8 +1,0 @@
-Apr 06, 2022 4:33:07 PM stepDefs.Hooks startUp
-INFO: Scenario ADTJIRA_WorkitemCreationInUI run is starting now
-Apr 06, 2022 4:33:07 PM stepDefs.Hooks startUp
-INFO: Scenario start time: 2022-04-06 16:33:07.039
-Apr 06, 2022 4:33:07 PM testobjects.CommonFunctions copyFileContentFromOneFileToAnother
-INFO: Property File loaded
-Apr 06, 2022 4:34:27 PM utilities.selenium.SeleniumDSL prepareWebElementWithDynamicXpath
-INFO: Generated xpath isBy.xpath: //li[contains(@id,'bom')]

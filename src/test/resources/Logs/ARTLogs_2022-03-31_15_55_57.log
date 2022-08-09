@@ -1,6 +1,0 @@
-Mar 31, 2022 3:55:57 PM stepDefs.Hooks startUp
-INFO: Scenario GenericUploader_NoTool run is starting now
-Mar 31, 2022 3:55:57 PM stepDefs.Hooks startUp
-INFO: Scenario start time: 2022-03-31 15:55:57.771
-Mar 31, 2022 3:55:57 PM testobjects.CommonFunctions copyFileContentFromOneFileToAnother
-INFO: Property File loaded

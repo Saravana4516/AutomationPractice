@@ -14,7 +14,6 @@ import org.testng.Assert;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.screentaker.ViewportPastingStrategy;
-import testobjects.Baseclass;
 import utilities.general.Property;
 import utilities.iris.APICaller;
 import utilities.reporting.ExtentTestManager;
@@ -69,7 +68,7 @@ public class SeleniumDSL {
     {
 
         ArrayList<String> tabs = new ArrayList<String> (driver().getWindowHandles());
-        driver().switchTo().window(tabs.get(Baseclass.getInstance().NoOfTabs));
+  //      driver().switchTo().window(tabs.get(Baseclass.getInstance().NoOfTabs));
 
     }
     /** get current window handle */

@@ -40,8 +40,8 @@ public class CaptureHAR {
 
 	public static void main(String[] args) {
 		
-		String driverPath = "C:\\Users\\sonal.harish.nagda\\Documents\\almPT_old\\src\\test\\resources\\drivers\\chromedriver.exe";
-		String sFileName = "C:\\Users\\sonal.harish.nagda\\SeleniumEasy1.har";
+		String driverPath = "C:\\Users\\Documents\\almPT_old\\src\\test\\resources\\drivers\\chromedriver.exe";
+		String sFileName = "C:\\Users\\SeleniumEasy1.har";
 		BrowserMobProxyServer proxy = new BrowserMobProxyServer();
 	    proxy.start(0);
 	    Proxy seleniumProxy = ClientUtil.createSeleniumProxy(proxy);
@@ -53,7 +53,7 @@ public class CaptureHAR {
 		capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 		capabilities.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS,true);
 	    
-	    System.setProperty("webdriver.chrome.driver", "C:\\Users\\sonal.harish.nagda\\Documents\\almPT_old\\src\\test\\resources\\drivers\\chromedriver.exe");
+	    System.setProperty("webdriver.chrome.driver", "C:\\Users\\Documents\\almPT_old\\src\\test\\resources\\drivers\\chromedriver.exe");
 		driver = new ChromeDriver(capabilities);
 		proxy.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
 		  proxy.newHar("test");

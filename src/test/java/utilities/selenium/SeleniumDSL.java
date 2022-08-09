@@ -14,7 +14,6 @@ import org.testng.Assert;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.screentaker.ViewportPastingStrategy;
-import testobjects.Baseclass;
 import utilities.general.Property;
 import utilities.iris.APICaller;
 import utilities.reporting.ExtentTestManager;
@@ -69,7 +68,7 @@ public class SeleniumDSL {
     {
 
         ArrayList<String> tabs = new ArrayList<String> (driver().getWindowHandles());
-        driver().switchTo().window(tabs.get(Baseclass.getInstance().NoOfTabs));
+      //  driver().switchTo().window(tabs.get(Baseclass.getInstance().NoOfTabs));
 
     }
     /** get current window handle */
@@ -1018,6 +1017,32 @@ public class SeleniumDSL {
             if(!actual.equalsIgnoreCase(currentHandle)) {
 
                 driver().switchTo().window(actual);
+            }
+        }
+    }
+
+    public static void SwitchWindow() {
+
+        String parent = driver().getWindowHandle();
+
+        Set<String> s = driver().getWindowHandles();
+        int a = s.size();
+        System.out.println(a);
+
+// Now iterate using Iterator
+        Iterator<String> I1 = s.iterator();
+
+        while (I1.hasNext()) {
+
+            String child_window = I1.next();
+
+
+            if (!parent.equals(child_window)) {
+                driver().switchTo().window(child_window);
+
+                System.out.println(driver().switchTo().window(child_window).getTitle());
+
+
             }
         }
     }

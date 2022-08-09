@@ -39,49 +39,9 @@ public class practice {
 
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws ParseException {
-//		SimpleDateFormat format1 = new SimpleDateFormat("mm/dd/yyyy");
-//		String d = "5/20/2020";
-//		SimpleDateFormat format = new SimpleDateFormat("DD/MMM/yy");
-//		Date date = format.parse("08/16/2021");
-//		System.out.println(format.format(date));
+//
 		
-//		SimpleDateFormat dFormat = new SimpleDateFormat("M/d/yyyy");
-//		SimpleDateFormat dFormatRequired = new SimpleDateFormat("MM-dd-YYYY");
-//		 Date date = dFormat.parse(d);
-//		 String ddate = dFormatRequired.format(date);
-//		 System.out.println(ddate);
-//		 
-//		 String a = "mam";
-//		 String b = "mam";
-//		 if(a==b)
-//		 {
-//			 System.out.println("hel");
-//		 }
-//		 
-//		 String test = "Hell:There";
-//		 String test1 = test.replace("Hell", "There");
-//		 System.out.println(test1);
-//		 
-//		ArrayList<String> ADTJiraEntities = new ArrayList<>(Arrays.asList("Epic", "Feature", "UserStory", "Task", "Bug" , "Impediment", "Issue", "Risk"));
-////		ArrayList<String> UI = new ArrayList<>(Arrays.asList("Epic", "Feature", "UserStory", "Task", "Bug" , "Impediment", "Issue"));
-//		ArrayList<String> UI = new ArrayList<>();
-//		ADTJiraEntities.removeAll(UI);
-//		System.out.println(ADTJiraEntities);
-//		System.out.println(ADTJiraEntities.size());
-		
-		
-//		Excel.setExcelLocAndSheet("C:\\Users\\sonal.harish.nagda\\Documents\\DefaultIntegartionPerametersValue_ADOP_ADT_TFSAgile.xlsx", "ADT Inbound");
-//		System.out.println(utilities.selenium.Excel.getCellData(1, 1));
-		
-//		HashMap<String, String> hmap = new HashMap<>();
-//		hmap.put("a", "apple");
-//		hmap.put("b", "ball");
-//		System.out.println(hmap.containsKey("a"));
-//		System.out.println(hmap.get("a"));
-//		ChromeOptions capability = new ChromeOptions();
-		
-		
-			System.setProperty("webdriver.chrome.driver", "C:\\Users\\sonal.harish.nagda\\Documents\\almPT_old\\src\\test\\resources\\drivers\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\Documents\\almPT_old\\src\\test\\resources\\drivers\\chromedriver.exe");
 			DesiredCapabilities capabilities = new DesiredCapabilities();
 			capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 			capabilities.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS,true);

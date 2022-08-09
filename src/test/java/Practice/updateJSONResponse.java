@@ -30,7 +30,7 @@ public class updateJSONResponse {
 //		   String jsonPath = "details.City";
 //		   String newValue = "Pune";
 //		   System.out.println(json.set(jsonPath, newValue).jsonString());
-		   File file = new File("C:\\Users\\sonal.harish.nagda\\Desktop\\workitem.json");
+		   File file = new File("C:\\Users\\Desktop\\workitem.json");
 		   DocumentContext json = JsonPath.using(configuration).parse(file);
 //		   String jsonPath = "WorkItems[0].CorrelationUId";
 //		   String jsonPath  = "WorkItems[0].WorkItemAttributes[0].Value";
@@ -41,12 +41,8 @@ public class updateJSONResponse {
 //		   DocumentContext finaljson = json.set(jsonPath, newValue);
 		   DocumentContext finaljson;
 //		   finaljson = json.set(jsonPath1, newValue1);
-		   finaljson = json.set("WorkItems[0].CorrelationUId", Generators.timeBasedGenerator().generate());
-		   finaljson = json.set("WorkItems[0].ItemState", 1);
-		   finaljson = json.set("WorkItems[0].CreatedByApp", "myWizard.IssueManagement");
-		   finaljson = json.set("WorkItems[0].ModifiedByApp", "myWizard.IssueManagement");
-		   finaljson = json.set("WorkItems[0].WorkItemAttributes[0].Value", "new title567");
-		   finaljson = json.set("WorkItems[0].ModifiedAtSourceOn", (new Random().nextInt(2)+2024+"-"+String.format("%02d", Integer.valueOf(String.valueOf(new Random().nextInt(12)+1)))+"-"+String.format("%02d", Integer.valueOf(String.valueOf(new Random().nextInt(28)+1)))+"T18:48:07.6972433"));
+		   finaljson = json.set("sample", Generators.timeBasedGenerator().generate());
+		   finaljson = json.set("ModifiedAtSourceOn", (new Random().nextInt(2)+2024+"-"+String.format("%02d", Integer.valueOf(String.valueOf(new Random().nextInt(12)+1)))+"-"+String.format("%02d", Integer.valueOf(String.valueOf(new Random().nextInt(28)+1)))+"T18:48:07.6972433"));
 //		   String a = json.set(jsonPath1, newValue1).jsonString();
 		   System.out.println(finaljson.jsonString());
 		 
@@ -62,7 +58,7 @@ public class updateJSONResponse {
 		   
 		   JSONParser parser = new JSONParser();
 		   JSONObject jsonObject = (JSONObject) parser.parse(finaljson.jsonString());
-		   String msgType = (String) jsonObject.get("WorkItems").toString();
+		   String msgType = (String) jsonObject.get("dvsd").toString();
 //		   System.out.println(msgType);
 		   System.out.println(msgType.substring(1, msgType.length() - 1));
 

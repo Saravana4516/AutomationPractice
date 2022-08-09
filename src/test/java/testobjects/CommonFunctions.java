@@ -7,41 +7,22 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
 
 import static utilities.reporting.LogUtil.logger;
-import static utilities.reporting.Reporting.create_logs_and_report;
 
-import static utilities.selenium.SeleniumDSL.*;
-
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 
 import org.apache.commons.codec.binary.Base64;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
-import org.testng.asserts.SoftAssert;
 
-import dataobjects.WorkItemDO;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import uiMap.MyWizardUIMap;
-import uiMap.TFSUIMap;
-import uiMap.myQueriesUIMap;
-import utilities.general.DataManager;
 import utilities.general.Property;
-import uiMap.MyWizardUIMap;
-import utilities.general.Property;
-import utilities.selenium.SeleniumDSL;
+
 import java.security.spec.KeySpec;
-import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.DESedeKeySpec;
-import org.apache.commons.codec.binary.Base64;
+
 public class CommonFunctions {
 	
 	public static String testDataPath = System.getProperty("user.dir")
@@ -74,30 +55,7 @@ public class CommonFunctions {
 		}
 		
 	}
-	
-	public static WorkItemDO GetFieldValueFromWorkItemJSON(String toolname, String workitem) {
-		try{
-			String testDataPath = System.getProperty("user.dir")+File.separator + "src" + File.separator + "test" + File.separator+ "resources" + File.separator + "testdata" + File.separator;
-			
-			String testDataPath_WorkItemExternalIDs="";
-			if((toolname.equalsIgnoreCase("ADT Jira") || toolname.equalsIgnoreCase("ADOP Jira") || toolname.contains("Jira") || toolname.contains("JIRA")))
-			{
-					testDataPath_WorkItemExternalIDs = testDataPath + "Jira" + File.separator + "JSON" +  File.separator + "WorkItem.json" ;
-			}
-			
-			else if((toolname.equalsIgnoreCase("TFS Agile") || toolname.equalsIgnoreCase("TFS Scrum") || toolname.contains("TFS")))
-			{
-				testDataPath_WorkItemExternalIDs = testDataPath + "TFS" + File.separator + "JSON" +  File.separator; 
-			}		
-				WorkItemDO wi = DataManager.getData(testDataPath_WorkItemExternalIDs, "WorkItem",WorkItemDO.class).item.get(workitem);
-				return wi;
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		return null;
-	}
+
 
 	public static String SpiltWorkitem(String fullworkitemID)
 	{
@@ -148,16 +106,13 @@ public class CommonFunctions {
 	public static void generateToken(String env) throws IOException {
 		try{
 		switch(env){
-		case "DevTest":
-		case "devtest":
-			String PostUrl="https://login.microsoftonline.com/f3211d0e-125b-42c3-86db-322b19a65a22/oauth2/token";
+		case "sample":
+		case "SAMPLE":
+			String PostUrl="";
 			 Response response = RestAssured
 					    .given()
-					    .header("Content-Type", "application/x-www-form-urlencoded")
-					    .formParam("grant_type", "client_credentials")
-					    .formParam("client_id", "af3d00bb-72bd-4ad9-8ea6-b5dd5c650aed")
-					    .formParam("resource","af3d00bb-72bd-4ad9-8ea6-b5dd5c650aed")
-					    .formParam("client_secret", "Y1N2T2VzIyV3dFJ4JUJnNA==")
+					    .header("header1", "value1")
+					    .formParam("header2", "value2")
 					    .request()
 					    .post(PostUrl);
 			 Thread.sleep(10000);
@@ -168,9 +123,9 @@ public class CommonFunctions {
 						
 				 }
 				 Assert.assertEquals(response.getStatusCode(), 200);
-				 logger.info("token gen comlpete");
+				 logger.info("comlpete");
 				 JsonPath js = response.jsonPath();
-					String token = js.get("access_token");
+					String token = js.get("value");
 					Property.setProperty("Token", token);
 			break;
 		}
@@ -178,15 +133,10 @@ public class CommonFunctions {
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			Assert.fail("Issue generating the token for "+env+" environment");
+			Assert.fail("Issue generating the value for "+env+" sample");
 		}
 	}
 
-	public static void checkoverallstatusofworkitemcreation(String env) {
-		if(Baseclass.getInstance().workitemcreation_fail)
-			Assert.fail("Issue with workitem creation for "+env);
-		
-	}
 	
 	public static int GenerateRandomNumber()
 	{
@@ -194,132 +144,23 @@ public class CommonFunctions {
 		return (1000 + rnd.nextInt(9000));
 		
 	}
-	public static void captureIterationExternalID(String toolOrRMP, String toolname) {
-		try{
-		ExpWaitForElementToDisappear(MyWizardUIMap.waitSign_Img);
-		Thread.sleep(5000);
-		ExpWaitForElementToDisappear(MyWizardUIMap.waitSign_Img);
-		ExpWaitForCondition(MyWizardUIMap.selectmyquery);
-		clickJS(MyWizardUIMap.selectmyquery);
-		ExpWaitForElementToDisappear(MyWizardUIMap.waitSign_Img);
-		Thread.sleep(5000);
-		ExpWaitForElementToDisappear(MyWizardUIMap.waitSign_Img);
-		String releasename="";
-		String sprintname="";
-		int totalrecordcount;
-		String release_IterationExternalID="";
-		String sprint_IterationExternalID="";
-		if(toolOrRMP.equalsIgnoreCase("tool")){
-		HashMap<String,String> hm = Tools.getReleaseAndSprintDetails(toolname);
-		releasename = hm.get("ReleaseName");
-		sprintname = hm.get("SprintName");
-		}
-		else if(toolOrRMP.equalsIgnoreCase("RMP"))
-		{
-			HashMap<String,String> hm = RMP.getReleaseAndSprintDetailsCreatedInRMP(toolname);
-			releasename = hm.get("ReleaseName_FromRMP");
-			sprintname = hm.get("SprintName_FromRMP");
-		}
-		doubleClick(MyWizardUIMap.QueryValue_txtbox);
-		Thread.sleep(4000);
-		
-		enterText(MyWizardUIMap.QueryValueInput_txtbox,releasename);
-		clickJS(MyWizardUIMap.runQuery_btn);
-		ExpWaitForElementToDisappear(MyWizardUIMap.waitSign_Img);
-		if(CheckIfElementExists(MyWizardUIMap.QueryRunSuccess_Msg)){			
-			boolean morethanonerow_QueryResult = CheckIfElementExists(MyWizardUIMap.GetIterationExternalID_MoreThanoneRow_statictxt);
-			if(morethanonerow_QueryResult)
-			{
-				Assert.fail("More than one row in search result for the searched release or sprint ID");
-			}
-		
-			if(CheckIfElementExists(MyWizardUIMap.GetIterationExternalID_statictxt)){	
-				totalrecordcount=1;
-				release_IterationExternalID = getText(MyWizardUIMap.GetIterationExternalID_statictxt);
-				Tools.CreateIBReport("Release", totalrecordcount, toolname);
-		}
-		}
-		else if(CheckIfElementExists(MyWizardUIMap.QueryRunFailure_Msg)) {
-			totalrecordcount=0;
-			Tools.CreateIBReport("Release", totalrecordcount, toolname);
-			logger.info("Release Not flown for "+ toolname);
-		}
-	
-		
-		
-//		enter sprint details
-		clickJS(MyWizardUIMap.QueryValue_txtbox);
-		sendDelete();
-		Thread.sleep(4000);
-		enterText(MyWizardUIMap.QueryValueInput_txtbox,sprintname);
-		clickJS(MyWizardUIMap.runQuery_btn);
-		ExpWaitForElementToDisappear(MyWizardUIMap.waitSign_Img);
-		if(CheckIfElementExists(MyWizardUIMap.QueryRunSuccess_Msg)) {
-			Thread.sleep(10000);
-			boolean morethanonerow_QueryResult_Sprint = CheckIfElementExists(MyWizardUIMap.GetIterationExternalID_MoreThanoneRow_statictxt);
-			if(morethanonerow_QueryResult_Sprint)
-			{
-				Assert.fail("More than one row in search result for the searched sprint ID");
-			}
-		
-		Thread.sleep(5000);
-		if(CheckIfElementExists(MyWizardUIMap.GetIterationExternalID_statictxt)){	
-			totalrecordcount=1;
-			sprint_IterationExternalID = getText(MyWizardUIMap.GetIterationExternalID_statictxt);
-			Tools.CreateIBReport("Sprint", totalrecordcount, toolname);
-			
-		}
-		}
-		else if(CheckIfElementExists(MyWizardUIMap.QueryRunFailure_Msg))
-		{
-			totalrecordcount=0;
-			Tools.CreateIBReport("Sprint", totalrecordcount, toolname);			
-			logger.info("Sprint not flown for the tool"+toolname);
-			Assert.fail("Sprint not flown for the tool"+toolname);
-		}
-		
-		Baseclass.getInstance().release_IterationExternalID = release_IterationExternalID;
-		Baseclass.getInstance().sprint_IterationExternalID =sprint_IterationExternalID; 
-		writeIterationExternalIDs(release_IterationExternalID,sprint_IterationExternalID,toolname);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			logger.info("issue running the query in myqueiries to fectch IterationExternalID");
-		}
-	}
-	public static void writeIterationExternalIDs(String release_IterationExternalID, String sprint_IterationExternalID,
-			String toolname) {
+
+	public static void writeValues(String string1, String string2,
+			String string3) {
 		
 		try{
-		String writeIterationExternalIDs_Details="";
+		String writeDetails="";
 		
-			if(toolname.contains("Jira") || toolname.contains("JIRA")){
-				writeIterationExternalIDs_Details = testDataPath + "Jira" + File.separator + "JSON" +  File.separator + "IterationExternalIDs.json" ;
+			if(string1.contains("sample") || string1.contains("Sample")){
+				writeDetails = testDataPath + "sample" + File.separator + "JSON" +  File.separator + "IDs.json" ;
 			}
-			else if(toolname.contains("TFS") || toolname.contains("Tfs")){
-				writeIterationExternalIDs_Details = testDataPath + "TFS" + File.separator + "JSON" +  File.separator + "IterationExternalIDs.json" ;
-			}
-			else if(toolname.contains("AIDT")){
-				writeIterationExternalIDs_Details = testDataPath + "AIDT" + File.separator + "JSON" +  File.separator + "IterationExternalIDs.json" ;
-			}
-			else if(toolname.equalsIgnoreCase("ADTInstance")||toolname.equalsIgnoreCase("MyWizardInstance"))
-			{
-			writeIterationExternalIDs_Details = testDataPath + "DataLoader" + File.separator + "GenericUploader"+ File.separator +"ADTJira" + File.separator +"JSON"+ File.separator + "GenericUploaderIterationExternalIDs.json" ;
 
-			}
-			else if(toolname.equalsIgnoreCase("NoToolInstance"))
-			{
-			writeIterationExternalIDs_Details = testDataPath + "DataLoader" + File.separator + "GenericUploader"+ File.separator +"NoTool" + File.separator +"JSON"+ File.separator + "GenericUploaderIterationExternalIDs.json" ;
-
-			}
-		
-			FileReader reader = new FileReader(writeIterationExternalIDs_Details);
+			FileReader reader = new FileReader(writeDetails);
 	        JSONParser jsonParser = new JSONParser();
 	        JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
-	        jsonObject.put("IterationExternalID_Release",release_IterationExternalID);
-	        jsonObject.put("IterationExternalID_Sprint",sprint_IterationExternalID);
-	        FileOutputStream outputStream = new FileOutputStream(writeIterationExternalIDs_Details);
+	        jsonObject.put("vale1",string2);
+	        jsonObject.put("value2",string3);
+	        FileOutputStream outputStream = new FileOutputStream(writeDetails);
 			 byte[] strToBytes = jsonObject.toString().getBytes(); outputStream.write(strToBytes);
 
 		}
@@ -328,67 +169,7 @@ public class CommonFunctions {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void writeTeamDetails(String toolname) {
-		
-		try{
-		String writeIterationExternalIDs_Details="";
-		
-			if(toolname.contains("Jira") || toolname.contains("JIRA")){
-				writeIterationExternalIDs_Details = testDataPath + "Jira" + File.separator + "JSON" +  File.separator + "WorkItemExternalIDs.json" ;
-			}
-			else if(toolname.contains("TFS") || toolname.contains("Tfs")){
-				writeIterationExternalIDs_Details = testDataPath + "TFS" + File.separator + "JSON" +  File.separator + "WorkItemExternalIDs.json" ;
-			}
-		
-			FileReader reader = new FileReader(writeIterationExternalIDs_Details);
-	        JSONParser jsonParser = new JSONParser();
-	        JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
-	        jsonObject.put("TeamUId",Baseclass.getInstance().TeamUId);
-	        jsonObject.put("Team_Name",Baseclass.getInstance().teamName);
-	        FileOutputStream outputStream = new FileOutputStream(writeIterationExternalIDs_Details);
-			 byte[] strToBytes = jsonObject.toString().getBytes(); outputStream.write(strToBytes);
 
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-	public static void setIterationExternalID(String toolname) {
-		
-		String FileToFetch="";
-			try{
-			if(toolname.contains("Jira") || toolname.contains("JIRA")){
-				FileToFetch = testDataPath + "Jira" + File.separator + "JSON" +  File.separator + "IterationExternalIDs.json" ;
-			}
-			else if(toolname.contains("TFS") || toolname.contains("Tfs")){
-				FileToFetch = testDataPath + "TFS" + File.separator + "JSON" +  File.separator + "IterationExternalIDs.json" ;
-			}
-			else if(toolname.equalsIgnoreCase("ADTInstance")||(toolname.equalsIgnoreCase("MyWizardInstance")))
-			{
-			FileToFetch = testDataPath + "DataLoader" + File.separator + "GenericUploader"+ File.separator +"ADTJira" + File.separator +"JSON"+ File.separator + "GenericUploaderIterationExternalIDs.json" ;
-
-			}
-			else if(toolname.equalsIgnoreCase("NoToolInstance"))
-			{
-			FileToFetch = testDataPath + "DataLoader" + File.separator + "GenericUploader"+ File.separator +"NoTool" + File.separator +"JSON"+ File.separator + "GenericUploaderIterationExternalIDs.json" ;
-
-			}
-			JSONParser parser = new JSONParser();
-			Object obj = parser.parse(new FileReader(FileToFetch));
-			JSONObject jsonObject = (JSONObject) obj;
-			
-			Baseclass.getInstance().release_IterationExternalID= (String) jsonObject.get("IterationExternalID_Release");
-			Baseclass.getInstance().sprint_IterationExternalID = (String) jsonObject.get("IterationExternalID_Sprint");
-			
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-	}
 	
 	  public static String encrypt(String unencryptedString) {
 	        String encryptedString = null;
@@ -428,195 +209,9 @@ public class CommonFunctions {
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
+			System.out.println(decryptedText);
 	        return decryptedText;
+
 	    }
 
-		public static void captureEntityDetails(String entitydetailsToCapture, String toolname) {
-			try{
-			ExpWaitForElementToDisappear(MyWizardUIMap.waitSign_Img);
-			Thread.sleep(5000);
-			ExpWaitForElementToDisappear(MyWizardUIMap.waitSign_Img);
-			ExpWaitForCondition(MyWizardUIMap.selectmyquery);
-			clickJS(MyWizardUIMap.selectmyquery);
-			ExpWaitForElementToDisappear(MyWizardUIMap.waitSign_Img);
-			Thread.sleep(5000);
-			ExpWaitForElementToDisappear(MyWizardUIMap.waitSign_Img);
-			
-			doubleClick(MyWizardUIMap.QueryValue_txtbox);
-			Thread.sleep(4000);
-			
-	
-			
-			String[] MSPSEntities = {"ReleaseForMSPS","Initiative","FunctionalArea","Milestone","Deliverable"}; 
-			int totalrecordcount=0;
-		
-			for(String entity:MSPSEntities){
-			
-				switch(entity){
-				
-				case "ReleaseForMSPS":
-					HashMap<String,String> hm = Tools.getReleaseAndSprintDetails(toolname);					
-					totalrecordcount=EnterEntityNameAndcheckIfQueryExecutedSuccessfully(entity,toolname);									
-					break;					
-					
-				case "Initiative":
-				case "FunctionalArea":						
-					totalrecordcount=EnterEntityNameAndcheckIfQueryExecutedSuccessfully(entity,toolname);						
-					break;				
-									
-				case "Milestone":
-					clickJS(myQueriesUIMap.Queries_link);
-					ExpWaitForElementToDisappear(MyWizardUIMap.waitSign_Img);
-					clickJS(myQueriesUIMap.selectMilestoneQuery_link);
-					ExpWaitForElementToDisappear(MyWizardUIMap.waitSign_Img);
-					Thread.sleep(4000);
-					ExpWaitForElementToDisappear(MyWizardUIMap.waitSign_Img);
-					totalrecordcount=EnterEntityNameAndcheckIfQueryExecutedSuccessfully(entity,toolname);
-					break;
-					
-				case "Deliverable":
-					clickJS(myQueriesUIMap.Queries_link);
-					ExpWaitForElementToDisappear(MyWizardUIMap.waitSign_Img);
-					clickJS(myQueriesUIMap.selectDeliverableQuery_link);
-					ExpWaitForElementToDisappear(MyWizardUIMap.waitSign_Img);
-					Thread.sleep(4000);
-					ExpWaitForElementToDisappear(MyWizardUIMap.waitSign_Img);
-					totalrecordcount=EnterEntityNameAndcheckIfQueryExecutedSuccessfully(entity,toolname);				
-					break;		
-					
-				}
-				if(totalrecordcount==1) {
-					switch(entity){
-					case "ReleaseForMSPS":
-						Baseclass.getInstance().release_IterationExternalID=getText(MyWizardUIMap.GetIterationExternalID_statictxt);
-						System.out.println(entity +" external ID is "+getText(MyWizardUIMap.GetIterationExternalID_statictxt));
-						break;
-					case "Initiative":
-						Baseclass.getInstance().InitiativeExternalID=getText(MyWizardUIMap.GetIterationExternalID_statictxt);
-						System.out.println(entity +" external ID is "+getText(MyWizardUIMap.GetIterationExternalID_statictxt));
-						break;						
-					case "FunctionalArea":
-						Baseclass.getInstance().FunctionalAreaExternalID=getText(MyWizardUIMap.GetIterationExternalID_statictxt);
-						System.out.println(entity +" external ID is "+getText(MyWizardUIMap.GetIterationExternalID_statictxt));
-						break;
-					case "Milestone":
-						Baseclass.getInstance().MilestoneExternalID=getText(MyWizardUIMap.GetIterationExternalID_statictxt);
-						System.out.println(entity +" external ID is "+getText(MyWizardUIMap.GetIterationExternalID_statictxt));
-						entity="Milestone_MSPS";
-						break;
-					case "Deliverable":
-						Baseclass.getInstance().DeliverableExternalID=getText(MyWizardUIMap.GetIterationExternalID_statictxt);
-						System.out.println(entity +" external ID is "+getText(MyWizardUIMap.GetIterationExternalID_statictxt));
-						entity="Deliverable_MSPS";
-						break;
-						
-					}
-				Tools.CreateIBReport(entity, totalrecordcount, toolname);
-					
-				}else {
-					logger.info(entity+" not flown for "+toolname);
-					Tools.CreateIBReport(entity, totalrecordcount, toolname);
-				}
-				clickJS(MyWizardUIMap.QueryValue_txtbox);
-				sendDelete();
-				Thread.sleep(2000);
-			}
-			
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-		}
-
-		public static int EnterEntityNameAndcheckIfQueryExecutedSuccessfully(String entitydetailsToCapture,String toolname) {
-			try{
-				
-//				singleClick(By.xpath("//div[@role='row']/child::div[@col-id='Value']"));
-				singleClick(By.xpath("//div[@col-id='Value'][@role='gridcell']"));
-				enterText(MyWizardUIMap.QueryValueInput_txtbox,Tools.getWorkItemExternalID(entitydetailsToCapture, toolname));
-				System.out.println(Tools.getWorkItemExternalID(entitydetailsToCapture, toolname));
-				clickJS(MyWizardUIMap.runQuery_btn);
-				ExpWaitForElementToDisappear(MyWizardUIMap.waitSign_Img);
-				int totalrecordcount = 0;
-				
-				if(CheckIfElementExists(MyWizardUIMap.QueryRunSuccess_Msg)){
-					totalrecordcount=1;
-				}
-				else if(CheckIfElementExists(MyWizardUIMap.QueryRunFailure_Msg)){
-					totalrecordcount=0;
-				}
-				else {
-					boolean morethanonerow_QueryResult = CheckIfElementExists(MyWizardUIMap.GetIterationExternalID_MoreThanoneRow_statictxt);
-					if(morethanonerow_QueryResult)
-					{
-						Assert.fail("More than one row in search result for the entity "+entitydetailsToCapture+" in myqueries tile");
-					}
-				}
-				return totalrecordcount;
-				}
-			
-				catch(Exception e)
-				{
-					logger.info("Query not run successfully in myqueries tile while fetching MSPS details for "+entitydetailsToCapture);
-					Assert.fail("Query not run successfully in myqueries tile while fetching MSPS details for "+entitydetailsToCapture);
-					return 0;
-				}	
-			
-		}
-
-
-    public static void checkoverallstatusofservices(String env) {
-
-		try {
-			CommonAcrossApps.LoginToSplunk();
-//selecting DEVTEST Env
-			ExpWaitForCondition(TFSUIMap.ShowFilters_btn);
-			waitPageToLoad();
-			Thread.sleep(10000);
-			clickJS(TFSUIMap.ShowFilters_btn);
-			ExpWaitForCondition(TFSUIMap.FilterTechnical_text);
-			clickJS(TFSUIMap.Environment_txtbox);
-			Thread.sleep(2000);
-			clickJS(TFSUIMap.DEVTEST_btn);
-			Thread.sleep(7000);
-			sendEsc();
-			clickJS(TFSUIMap.Reload_btn);
-			Thread.sleep(7000);
-			String Services_tobechecked[]= {"myWizard.ENS.EventEngineService.service","myWizard.ENS.EventNotifierRetryService.service","myWizard.ENS.EventNotifierService.service","myWizard.ProcessEntityService.service","myWizard.GatewayManager.EngineInboundService-10.service","myWizard.GatewayManager.EngineOutboundService-10.service","myWizard.GatewayManager.SchedulerService.service","myWizard.WebAPI.service"};
-			for(int i=0;i<Services_tobechecked.length;i++) {
-				ExpWaitForCondition(TFSUIMap.Service_txtbox);
-				clickJS(TFSUIMap.Service_txtbox);
-				enterText(TFSUIMap.Service_txtbox,Services_tobechecked[i]);
-				sendEntr();
-				Thread.sleep(3000);
-				sendEsc();
-				SoftAssert sa = new SoftAssert();
-				if(!getText(TFSUIMap.ServiceHealth_cell).contains("Available")) {
-					sa.fail("Service is Unavailable for "+ Services_tobechecked[i]);
-
-					if(!getText(TFSUIMap.ServiceInstalled_cell).contains("Service installed")) {
-						sa.fail("Service is not installed for "+ Services_tobechecked[i]);
-					}
-					if(!getText(TFSUIMap.ServiceStatus_cell).contains("Running")) {
-						sa.fail("Service is not installed for "+ Services_tobechecked[i]);
-					}
-
-				}
-				else {
-					logger.info(Services_tobechecked[i] +" is Available/Service Installed/Running");
-				}
-
-				clickJS(prepareWebElementWithDynamicXpath(TFSUIMap.RemoveServiceName_img, Services_tobechecked[i],"ServiceName"));
-				Thread.sleep(2000);
-
-
-			}
-
-		}catch(Exception e) {
-			e.printStackTrace();
-			logger.info("Issue in verifying the status of Service in Splunk");
-			Assert.fail("Issue in verifying the status of Service in Splunk");
-		}
-    }
 }

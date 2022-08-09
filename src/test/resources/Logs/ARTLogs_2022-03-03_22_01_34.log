@@ -1,8 +1,0 @@
-Mar 03, 2022 10:01:34 PM stepDefs.Hooks startUp
-INFO: Scenario Sample check run is starting now
-Mar 03, 2022 10:01:34 PM stepDefs.Hooks startUp
-INFO: Scenario start time: 2022-03-03 22:01:34.43
-Mar 03, 2022 10:01:34 PM stepDefs.Hooks closeDown
-INFO: =======================================================================
-Mar 03, 2022 10:01:34 PM stepDefs.Hooks closeDown
-INFO: Scenario  PASSED during execution. Scenario end time: 2022-03-03 22:01:34.437

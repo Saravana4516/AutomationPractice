@@ -14,12 +14,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class practiceexcel {
 
 	public static void main(String[] args) {
-		 String ClientNative_FileLoc = System.getProperty("user.dir")+ File.separator + "src" + File.separator + "test" + File.separator	+ "resources" + File.separator + "testdata" + File.separator + "MyWizard" + File.separator + "ClientNative" + File.separator +"ClientNative.xlsx";
+		 String FileLoc = System.getProperty("user.dir")+ File.separator + "src" + File.separator + "test" + File.separator	+ "resources" + File.separator	+ "doc.xlsx";
 		 
 		 try{
-				FileInputStream	 fis = new FileInputStream(new File(ClientNative_FileLoc));
+				FileInputStream	 fis = new FileInputStream(new File(FileLoc));
 				XSSFWorkbook workbook = new XSSFWorkbook (fis);
-				XSSFSheet sheet = workbook.getSheet("ADOP Jira");
+				XSSFSheet sheet = workbook.getSheet("Sheet1");
 				int noOfColumns = sheet.getRow(0).getLastCellNum();
 				int noofRows = sheet.getLastRowNum();
 				HashMap<String,ArrayList<String>> listofEntities = new HashMap<String,ArrayList<String>>();

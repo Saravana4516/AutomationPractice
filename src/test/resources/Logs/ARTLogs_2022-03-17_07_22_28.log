@@ -1,8 +1,0 @@
-Mar 17, 2022 7:22:28 AM stepDefs.Hooks startUp
-INFO: Scenario TFSAgile_WorkitemCreation run is starting now
-Mar 17, 2022 7:22:28 AM stepDefs.Hooks startUp
-INFO: Scenario start time: 2022-03-17 07:22:28.6
-Mar 17, 2022 7:22:28 AM testobjects.CommonFunctions copyFileContentFromOneFileToAnother
-INFO: Property File loaded
-Mar 17, 2022 7:22:48 AM utilities.selenium.SeleniumDSL prepareWebElementWithDynamicXpath
-INFO: Generated xpath isBy.xpath: //div[@class='project-name font-size-l font-weight-semibold text-ellipsis'][text()='TFS Agile1_ Client-Native']

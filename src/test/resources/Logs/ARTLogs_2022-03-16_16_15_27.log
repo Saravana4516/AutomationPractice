@@ -1,6 +1,0 @@
-Mar 16, 2022 4:15:27 PM stepDefs.Hooks startUp
-INFO: Scenario TFSAgile_WorkitemCreation run is starting now
-Mar 16, 2022 4:15:27 PM stepDefs.Hooks startUp
-INFO: Scenario start time: 2022-03-16 16:15:27.166
-Mar 16, 2022 4:15:27 PM testobjects.CommonFunctions copyFileContentFromOneFileToAnother
-INFO: Property File loaded

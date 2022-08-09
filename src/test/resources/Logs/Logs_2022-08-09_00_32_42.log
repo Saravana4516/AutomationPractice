@@ -1,0 +1,10 @@
+Aug 09, 2022 12:32:42 AM stepDefs.Hooks startUp
+INFO: Scenario Login Functionality run is starting now
+Aug 09, 2022 12:32:42 AM stepDefs.Hooks startUp
+INFO: Scenario start time: 2022-08-09 00:32:42.285
+Aug 09, 2022 12:32:42 AM testobjects.CommonFunctions copyFileContentFromOneFileToAnother
+INFO: Property File loaded
+Aug 09, 2022 12:32:52 AM stepDefs.Hooks closeDown
+INFO: =======================================================================
+Aug 09, 2022 12:32:52 AM stepDefs.Hooks closeDown
+INFO: Scenario  PASSED during execution. Scenario end time: 2022-08-09 00:32:52.86

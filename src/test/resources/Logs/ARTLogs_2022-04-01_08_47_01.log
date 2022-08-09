@@ -1,6 +1,0 @@
-Apr 01, 2022 8:47:01 AM stepDefs.Hooks startUp
-INFO: Scenario ADIT_WorkitemCreation run is starting now
-Apr 01, 2022 8:47:01 AM stepDefs.Hooks startUp
-INFO: Scenario start time: 2022-04-01 08:47:01.926
-Apr 01, 2022 8:47:02 AM testobjects.CommonFunctions copyFileContentFromOneFileToAnother
-INFO: Property File loaded

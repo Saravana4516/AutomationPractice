@@ -19,9 +19,9 @@ public class dum {
 
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
-		String fileToBeValidated = "C:\\Users\\sonal.harish.nagda\\Downloads\\GM-SOLMAN-Inbound.config.xml";
-//		String fileToBeValidated = "C:\\Users\\sonal.harish.nagda\\Downloads\\With Macro_GM-SOLMAN-Inbound_GM-SOLMAN-Inbound.config.xml";
-		String referenceJSON = "C:\\Users\\sonal.harish.nagda\\Downloads\\configTest.json";
+		String fileToBeValidated = "C:\\Users\\Downloads\\GM-SOLMAN-Inbound.config.xml";
+//		String fileToBeValidated = "C:\\Users\\Downloads\\With Macro_GM-SOLMAN-Inbound_GM-SOLMAN-Inbound.config.xml";
+		String referenceJSON = "C:\\Users\\Downloads\\configTest.json";
 		Document document = builder.parse(new File(fileToBeValidated));
 		document.getDocumentElement().normalize();
 

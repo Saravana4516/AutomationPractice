@@ -1,6 +1,0 @@
-Apr 26, 2022 5:02:42 PM stepDefs.Hooks startUp
-INFO: Scenario ADOPJIRA_Task run is starting now
-Apr 26, 2022 5:02:42 PM stepDefs.Hooks startUp
-INFO: Scenario start time: 2022-04-26 17:02:42.159
-Apr 26, 2022 5:03:59 PM testobjects.CommonFunctions copyFileContentFromOneFileToAnother
-INFO: Property File loaded

@@ -1,8 +1,0 @@
-Apr 21, 2022 4:30:31 PM stepDefs.Hooks startUp
-INFO: Scenario TFSScrum_Task run is starting now
-Apr 21, 2022 4:30:31 PM stepDefs.Hooks startUp
-INFO: Scenario start time: 2022-04-21 16:30:31.769
-Apr 21, 2022 4:30:32 PM testobjects.CommonFunctions copyFileContentFromOneFileToAnother
-INFO: Property File loaded
-Apr 21, 2022 4:30:46 PM testobjects.CommonFunctions generateToken
-INFO: token gen comlpete

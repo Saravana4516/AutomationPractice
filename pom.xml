@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>grp1</groupId>
-  <artifactId>ART</artifactId>
+  <artifactId>SelfLearn</artifactId>
   <version>SNAPSHOT-1.0</version>
   <reporting>
     <plugins>
@@ -67,11 +67,11 @@
                 <version>1.6.4</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
-<dependency>
-    <groupId>javax.mail</groupId>
-    <artifactId>mail</artifactId>
-    <version>1.4</version>
-</dependency>
+       <dependency>
+           <groupId>javax.mail</groupId>
+           <artifactId>mail</artifactId>
+           <version>1.4</version>
+       </dependency>
            <!-- https://mvnrepository.com/artifact/javax.xml.crypto/jsr105-api -->
 <dependency>
     <groupId>javax.xml.crypto</groupId>

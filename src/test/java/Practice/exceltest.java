@@ -1,29 +1,25 @@
 package Practice;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.simple.JSONObject;
 
-import testobjects.Baseclass;
 public class exceltest {
 
 	public static void main(String[] args) throws IOException {
-		String[] entities = {"Bug","Iteration","Requirement","Test","TestResult"};
+		String[] entities = {"sfbsdfb","Iteratidfnbfgnon"};
 		
-		FileInputStream fis = new FileInputStream(new File("C:\\Users\\sonal.harish.nagda\\Downloads\\AD_Entities.xlsx"));
+		FileInputStream fis = new FileInputStream(new File("C:\\Users\\Downloads\\AD_Entities.xlsx"));
 		XSSFWorkbook workbook = new XSSFWorkbook (fis);
 		
 		JSONObject jsonObject = new JSONObject();
-		String Entities_JSONFile = "C:\\Users\\sonal.harish.nagda\\Documents\\almPT_old\\src\\test\\resources\\testdata\\DataLoader\\JSON\\AD_DataLoaderJSON.json";
+		String Entities_JSONFile = "C:\\Users\\Documents\\almPT_old\\src\\test\\resources\\testdata\\DataLoader\\JSON\\AD_DataLoaderJSON.json";
 		
 	   
 		
@@ -38,7 +34,7 @@ public class exceltest {
 			
 		}
 		fis.close();
-		FileOutputStream fos = new FileOutputStream(new File("C:\\Users\\sonal.harish.nagda\\Downloads\\AD_Entities1.xlsx"));
+		FileOutputStream fos = new FileOutputStream(new File("C:\\Users\\Downloads\\AD_Entities1.xlsx"));
 		workbook.write(fos);
 	    fos.close();
 	    FileWriter file = new FileWriter(Entities_JSONFile);

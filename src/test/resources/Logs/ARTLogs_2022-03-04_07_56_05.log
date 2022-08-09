@@ -1,6 +1,0 @@
-Mar 04, 2022 7:56:05 AM stepDefs.Hooks startUp
-INFO: Scenario ADOPJira_WorkitemCcreation run is starting now
-Mar 04, 2022 7:56:05 AM stepDefs.Hooks startUp
-INFO: Scenario start time: 2022-03-04 07:56:05.833
-Mar 04, 2022 7:56:06 AM testobjects.CommonFunctions copyFileContentFromOneFileToAnother
-INFO: Property File loaded

@@ -11,7 +11,7 @@ public class practice2 {
 
 	public static void main(String[] args) throws JsonParseException, IOException {
 	
-		String filename = new String("C:\\Users\\sonal.harish.nagda\\SeleniumEasy.har");
+		String filename = new String("C:\\Users\\SeleniumEasy.har");
 	    File f = new File(filename);
 	    HarFileReader r = new HarFileReader();
 	    HarLog log = r.readHarFile(f);

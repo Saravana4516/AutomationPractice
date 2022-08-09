@@ -1,5 +1,0 @@
-@servcicecheck
-Feature: DevTest_ServicesChecking
- 
-Scenario: ServiceCheck
- Given I check all the required services are running for "DevTest"

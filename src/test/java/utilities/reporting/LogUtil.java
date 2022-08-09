@@ -17,10 +17,10 @@ public class LogUtil {
 		try {
 //			fh = new FileHandler(Property.getProperty("Log.dir")+"\\TAFLogs_"+(new Timestamp(System.currentTimeMillis())).toString().replace(" ","_").replace(":", "_").substring(0, 19)+".log");
 			
-//			fh = new FileHandler("C://Users//sonal.harish.nagda//Downloads//Automation projects"+".log");
+//			fh = new FileHandler("C://Users//Downloads//Automation projects"+".log");
 			String fileloc = System.getProperty("user.dir")
 					+ File.separator + "src" + File.separator + "test" + File.separator
-					+ "resources" + File.separator+"Logs"+ File.separator +"ARTLogs_"+(new Timestamp(System.currentTimeMillis())).toString().replace(" ","_").replace(":", "_").substring(0, 19)+".log";
+					+ "resources" + File.separator+"Logs"+ File.separator +"Logs_"+(new Timestamp(System.currentTimeMillis())).toString().replace(" ","_").replace(":", "_").substring(0, 19)+".log";
 //			fh = new FileHandler(System.getProperty("user.dir")+".log");
 			fh = new FileHandler(fileloc);
 			fh.setFormatter(new SimpleFormatter());

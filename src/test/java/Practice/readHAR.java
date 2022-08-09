@@ -15,7 +15,7 @@ import edu.umass.cs.benchlab.har.tools.HarFileReader;
 public class readHAR {
 
      public static void main(String[] args) {
-         String fileName = "C:\\Users\\sonal.harish.nagda\\SeleniumEasy.har";
+         String fileName = "C:\\Users\\SeleniumEasy.har";
          ReadHarFile(fileName);
     }
 

@@ -1,8 +1,0 @@
-Apr 18, 2022 2:39:52 PM stepDefs.Hooks startUp
-INFO: Scenario GenericUploader_NoTool run is starting now
-Apr 18, 2022 2:39:52 PM stepDefs.Hooks startUp
-INFO: Scenario start time: 2022-04-18 14:39:52.318
-Apr 18, 2022 2:39:55 PM stepDefs.Hooks closeDown
-INFO: =======================================================================
-Apr 18, 2022 2:39:55 PM stepDefs.Hooks closeDown
-INFO: Scenario  PASSED during execution. Scenario end time: 2022-04-18 14:39:55.932

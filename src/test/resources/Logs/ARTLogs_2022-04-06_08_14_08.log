@@ -1,6 +1,0 @@
-Apr 06, 2022 8:14:08 AM stepDefs.Hooks startUp
-INFO: Scenario Adding_DeliveryPlan_InRuleConfig run is starting now
-Apr 06, 2022 8:14:08 AM stepDefs.Hooks startUp
-INFO: Scenario start time: 2022-04-06 08:14:08.713
-Apr 06, 2022 8:14:09 AM testobjects.CommonFunctions copyFileContentFromOneFileToAnother
-INFO: Property File loaded

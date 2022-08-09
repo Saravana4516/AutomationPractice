@@ -1,6 +1,0 @@
-Apr 27, 2022 11:39:06 AM stepDefs.Hooks startUp
-INFO: Scenario ADOPJira_DIY_IBVerification_Release_Sprint run is starting now
-Apr 27, 2022 11:39:06 AM stepDefs.Hooks startUp
-INFO: Scenario start time: 2022-04-27 11:39:06.751
-Apr 27, 2022 11:39:07 AM testobjects.CommonFunctions copyFileContentFromOneFileToAnother
-INFO: Property File loaded

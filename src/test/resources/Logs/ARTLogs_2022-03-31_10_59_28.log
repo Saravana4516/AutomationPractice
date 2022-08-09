@@ -1,6 +1,0 @@
-Mar 31, 2022 10:59:28 AM stepDefs.Hooks startUp
-INFO: Scenario ADTJIRA_WorkitemCreationInUI run is starting now
-Mar 31, 2022 10:59:28 AM stepDefs.Hooks startUp
-INFO: Scenario start time: 2022-03-31 10:59:28.417
-Mar 31, 2022 10:59:29 AM testobjects.CommonFunctions copyFileContentFromOneFileToAnother
-INFO: Property File loaded
